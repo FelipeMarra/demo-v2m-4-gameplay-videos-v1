@@ -95,6 +95,11 @@
   </head>
 
     <main>
+      <!-- 
+      #######################################################################################
+        Title, Authors and Abstract
+      ####################################################################################### 
+      -->
       <section class="py-2"></section>
 
       <section class="bg-primary bg-opacity-10 py-5 text-center container">
@@ -109,6 +114,47 @@
             <p class="medium text-body-secondary lh-base" style="text-align: justify;">
               Video-to-music models are rapidly evolving, with recent approaches focusing on film and music video domains, typically adopting autoregressive encoder–decoder transformers with pre-trained components. Since multiple models have been proposed concurrently, they have not yet been systematically compared, and the question of how different visual encoders affect the quality of the decoded music remains open. In this paper, we address this gap using the retro video game domain, which offers a more structured evaluation setting and facilitates the collection of clean, paired data. We introduce a new dataset consisting of 485 hours of high-quality SNES soundtracks paired with gameplay videos, specifically curated to exclude voice-overs and sound effects. We systematically compare frozen and unfrozen encoders, including ViViT, ViT, and T5, using a MusicGen decoder. Our results demonstrate that ViViT outperforms ViT and T5, and that unfreezing encoders provides no significant performance gain. Finally, a listening test shows that our simplified ViViT-based model outperforms GVMGen and performs comparably to OSSL, despite having fewer parameters and less inductive bias.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 
+      #######################################################################################
+        Cards to Repositories
+      ####################################################################################### 
+      -->
+
+      <section class="py-2"></section>
+
+      <section class="bg-secondary bg-opacity-10 py-5 container justify-content-center">
+        <div class="row py-lg-5">
+          <div class="col-lg-10 col-md-10 mx-auto">
+            <h2 class="fw-light text-center">Code</h2>
+
+            <h3 class="fw-light text-right">Our Models and Database</h3>
+            <div class="container my-4">
+              <div class="row justify-content-center gap-4">
+                
+                <!-- Just add a new div like this for every repo you want to display -->
+                <div class="col-md-6 col-lg-5" repo="any2music"></div>
+                <div class="col-md-6 col-lg-5" repo="babel-bardo"></div>
+                <!-- <div class="col-md-6 col-lg-5" repo="another-repo"></div> -->
+
+              </div>
+            </div>
+
+            <h3 class="fw-light text-right">Baselines</h3>
+            <div class="container my-4">
+              <div class="row justify-content-center gap-4">
+                
+                <!-- Just add a new div like this for every repo you want to display -->
+                <div class="col-md-6 col-lg-5" repo="any2music"></div>
+                <div class="col-md-6 col-lg-5" repo="babel-bardo"></div>
+                <!-- <div class="col-md-6 col-lg-5" repo="another-repo"></div> -->
+
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -426,5 +472,65 @@
       src="./bootstrap/dist/js/bootstrap.bundle.min.js"
       class="astro-vvvwv3sm"
     ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Set your GitHub username here
+        const username = "FelipeMarra"; 
+
+        // 1. Find every element on the page that has the 'repo' attribute
+        const repoElements = document.querySelectorAll('[repo]');
+
+        // 2. Loop through each placeholder element
+        repoElements.forEach(container => {
+          // 3. Read the repository name from the attribute
+          const repoName = container.getAttribute('repo');
+
+          // 4. Fetch the data for this specific repo
+          fetch(`https://api.github.com/repos/${username}/${repoName}`)
+            .then(response => {
+              if (!response.ok) throw new Error("Network response was not ok");
+              return response.json();
+            })
+            .then(data => {
+              // 5. Build the card HTML (removed the col wrappers since the placeholder acts as the column)
+              const cardHTML = `
+              <a href="${data.html_url}" target="_blank" class="text-decoration-none text-dark fw-bold">
+                <div class="card shadow-sm h-100 text-start w-100">
+                  <div class="card-body d-flex flex-column">
+                    <div class="d-flex align-items-center mb-3">
+                      <img src="${data.owner.avatar_url}" alt="Owner Avatar" class="rounded-circle me-3" width="50" height="50">
+                      <div>
+                        <h5 class="card-title mb-0">
+                          ${data.name}
+                        </h5>
+                        <small class="text-muted">@${data.owner.login}</small>
+                      </div>
+                    </div>
+                    <p class="card-text text-secondary flex-grow-1">${data.description || "No description provided."}</p>
+                    <div class="d-flex justify-content-between align-items-center pt-2 border-top mt-auto">
+                      <span class="badge bg-light text-dark border">
+                        <i class="bi bi-star-fill text-warning me-1"></i> <span>${data.stargazers_count}</span> Stars
+                      </span>
+                      <span class="badge bg-light text-dark border">
+                        <i class="bi bi-diagram-2 me-1"></i> <span>${data.forks_count}</span> Forks
+                      </span>
+                      <span class="badge bg-primary ${data.language ? '' : 'd-none'}">${data.language || ''}</span>
+                    </div>
+                  </div>
+                </div>
+                </a>
+              `;
+
+              // 6. Inject the card right inside the placeholder div
+              container.innerHTML = cardHTML;
+            })
+            .catch(error => {
+              console.error(`Error fetching ${repoName}:`, error);
+              container.innerHTML = `<div class="alert alert-danger">Failed to load repository: ${repoName}</div>`;
+            });
+        });
+      });
+    </script>
   </body>
 </html>
