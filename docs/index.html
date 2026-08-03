@@ -136,8 +136,8 @@
               <div class="row justify-content-center gap-4">
                 
                 <!-- Just add a new div like this for every repo you want to display -->
-                <div class="col-md-6 col-lg-5" repo="any2music"></div>
-                <div class="col-md-6 col-lg-5" repo="babel-bardo"></div>
+                <div class="col-md-6 col-lg-5" repo="dataset-v2m-4-gameplay-videos-v1"></div>
+                <div class="col-md-6 col-lg-5" repo="models-v2m-4-gameplay-videos-v1"></div>
                 <!-- <div class="col-md-6 col-lg-5" repo="another-repo"></div> -->
 
               </div>
@@ -148,8 +148,8 @@
               <div class="row justify-content-center gap-4">
                 
                 <!-- Just add a new div like this for every repo you want to display -->
-                <div class="col-md-6 col-lg-5" repo="any2music"></div>
-                <div class="col-md-6 col-lg-5" repo="babel-bardo"></div>
+                <div class="col-md-6 col-lg-5" repo="gvmgen-v2m-4-gameplay-videos-v1"></div>
+                <div class="col-md-6 col-lg-5" repo="ossl-v1-v2m-4-gameplay-videos-v1"></div>
                 <!-- <div class="col-md-6 col-lg-5" repo="another-repo"></div> -->
 
               </div>
@@ -163,6 +163,30 @@
 
       <section class="album py-5 text-center container bg-body-tertiary">
       <h2 class="fw-light">Demo Videos</h2>
+      
+            <!-- 
+      #######################################################################################
+        Demo modal
+      ####################################################################################### 
+      -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="videoDescModal" tabindex="-1" aria-labelledby="Video Description Modal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">...</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- 
       #######################################################################################
         Mega Man X3 (Genre: Action)
@@ -219,8 +243,11 @@
                     <div class="btn-group">
                       <button
                         type="button"
-                        class="btn btn-sm btn-outline-secondary"
-                      >
+                        class="btn btn-sm btn-outline-secondary" 
+                        data-bs-toggle="modal" data-bs-target="#videoDescModal"
+                        data-bs-game="Mega Man X3"
+                        data-bs-content="a SNES soundtrack for a Action game. gameplay scene depicts Sonic Hedgehog navigating futuristic industrial environment side scrolling platformer jumps moves horizontally across platforms avoiding obstacles enemies game features classic platforming elements including enemy combat power ups pixelated graphics vibrant colors typical 16 bit era game falls genres platformer action adventure"
+                        >
                         Read Video Description
                       </button>
                     </div>
@@ -248,7 +275,7 @@
                         type="button"
                         class="btn btn-sm "
                         style="visibility: hidden;"
-                      >
+                        >
                         A
                       </button>
                     </div>
@@ -256,18 +283,18 @@
                 </div>
               </div>
             </div>
-
+            
           </div>
         </div>
       </div>
-
-    <!-- 
-      #######################################################################################
+      
+      <!-- 
+        #######################################################################################
         Super Mario Kart (Genre: Racing)
-      ####################################################################################### 
-    -->
-      <div class="py-5">
-        <div class="container">
+        ####################################################################################### 
+        -->
+        <div class="py-5">
+          <div class="container">
           <div class="col"><h2 class="pb-2 border-bottom">Super Mario Kart (Genre: Racing)</h2></div>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -318,6 +345,9 @@
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-secondary"
+                        data-bs-toggle="modal" data-bs-target="#videoDescModal"
+                        data-bs-game="Super Mario Kart"
+                        data-bs-content="a SNES soundtrack for a Racing game. gameplay features fast paced kart racing experience multiple characters competing dirt track track filled obstacles items includes various elements grassy areas water bodies ramps Players collect coins navigating track avoiding racers colorful cartoonish art style reminiscent classic Mario Kart games 1990s gameplay primarily racing game platforming elements"
                       >
                         Read Video Description
                       </button>
@@ -392,19 +422,19 @@
                         A
                       </button>
                     </div>
-
+                    
                   </div>
                 </div>
               </div>
             </div>
-
+            
             <div class="col">
               <div class="card shadow-sm">
-
+                
                 <div class="ratio ratio-4x3">
                   <iframe src="./videos/Tetris_2_OSSL.mp4" title="YouTube video" allowfullscreen></iframe>
                 </div>
-
+                
                 <div class="card-body">
                   <p class="card-text">
                     OSSL
@@ -416,8 +446,11 @@
                       <button
                         type="button"
                         class="btn btn-sm btn-outline-secondary"
+                        data-bs-toggle="modal" data-bs-target="#videoDescModal"
+                        data-bs-game="Tetris 2"
+                        data-bs-content="a SNES soundtrack for a Puzzle game. gameplay video features player controlled character navigating grid based environment colorful blocks black background character moves moderate pace blocks fall goal match score points progress levels simple retro style graphics blocky visuals reminiscent classic puzzle games gameplay mechanics art style consistent puzzle game likely match three block matching style game type puzzle game"
                       >
-                        Read Video Description
+                      Read Video Description
                       </button>
                     </div>
                   </div>
@@ -468,11 +501,14 @@
         </p>
       </div>
     </footer>
+
+    <!-- Script for Bootstrap-->
     <script
       src="./bootstrap/dist/js/bootstrap.bundle.min.js"
       class="astro-vvvwv3sm"
     ></script>
 
+    <!-- Script for Github widget-->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Set your GitHub username here
@@ -532,5 +568,26 @@
         });
       });
     </script>
+
+    <!-- Script for the demo's modal button on OSS demo videos -->
+    <script>
+        const exampleModal = document.getElementById('videoDescModal')
+        if (exampleModal) {
+          exampleModal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const game = button.getAttribute('data-bs-game')
+            const content = button.getAttribute('data-bs-content')
+
+            // Update the modal's content.
+            const modalTitle = exampleModal.querySelector('.modal-title')
+            const modalBody = exampleModal.querySelector('.modal-body')
+
+            modalTitle.textContent = `Video Description for ${game}`
+            modalBody.textContent = content
+          })
+        }
+      </script>
   </body>
 </html>
