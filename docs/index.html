@@ -521,22 +521,22 @@
         // Set your GitHub username here
         const username = "FelipeMarra"; 
 
-        // 1. Find every element on the page that has the 'repo' attribute
+        // Find every element on the page that has the 'repo' attribute
         const repoElements = document.querySelectorAll('[repo]');
 
-        // 2. Loop through each placeholder element
+        // Loop through each placeholder element
         repoElements.forEach(container => {
-          // 3. Read the repository name from the attribute
+          // Read the repository name from the attribute
           const repoName = container.getAttribute('repo');
 
-          // 4. Fetch the data for this specific repo
+          // Fetch the data for this specific repo
           fetch(`https://api.github.com/repos/${username}/${repoName}`)
             .then(response => {
-              if (!response.ok) throw new Error("Network response was not ok");
+              if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
               return response.json();
             })
             .then(data => {
-              // 5. Build the card HTML (removed the col wrappers since the placeholder acts as the column)
+              // Build the card HTML
               const cardHTML = `
               <a href="${data.html_url}" target="_blank" class="text-decoration-none text-dark fw-bold">
                 <div class="card shadow-sm h-100 text-start w-100">
@@ -565,17 +565,36 @@
                 </a>
               `;
 
-              // 6. Inject the card right inside the placeholder div
+              // Inject card inside placeholder div
               container.innerHTML = cardHTML;
             })
             .catch(error => {
-              console.error(`Error fetching ${repoName}:`, error);
-              container.innerHTML = `<div class="alert alert-danger">Failed to load repository: ${repoName}</div>`;
+              console.warn(`Fallback triggered for ${repoName}:`, error);
+              const fallbackUrl = `https://github.com/${username}/${repoName}`;
+              
+              // Fallback card with direct link
+              container.innerHTML = `
+              <a href="${fallbackUrl}" target="_blank" class="text-decoration-none text-dark fw-bold">
+                <div class="card shadow-sm h-100 text-start w-100">
+                  <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                      <h5 class="card-title mb-2 text-primary">
+                        ${repoName}
+                      </h5>
+                      <p class="card-text text-secondary small">Repository details unavailable due to API limits.</p>
+                    </div>
+                    <div class="pt-2 border-top mt-auto">
+                      <span class="text-primary small">View on GitHub &rarr;</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              `;
             });
         });
       });
     </script>
-
+  
     <!-- Script for the demo's modal button on OSS demo videos -->
     <script>
         const exampleModal = document.getElementById('videoDescModal')
