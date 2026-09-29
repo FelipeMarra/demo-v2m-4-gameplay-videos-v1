@@ -11,6 +11,18 @@
     <meta name="generator" content="Astro v5.13.2" />
     <title>Video-to-Music Generation for Gameplay Videos</title>
 
+    <!-- Standard Meta Description -->
+    <meta name="description" content="We investigate video-to-music generation in the video game domain, introducing a new dataset of 217.6 hours of Super Nintendo (SNES) gameplay paired with soundtracks, and evaluating different encoder-decoder transformers." />
+
+    <!-- Open Graph / LinkedIn / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Video-to-Music Generation for Gameplay Videos" />
+    <meta property="og:description" content="We investigate video-to-music generation in the video game domain, introducing a new dataset of 217.6 hours of Super Nintendo (SNES) gameplay paired with soundtracks, and evaluating different encoder-decoder transformers." />
+    <!-- URL where page is hosted -->
+    <meta property="og:url" content="https://felipemarra.github.io/demo-v2m-4-gameplay-videos-v1/" />
+    <!-- Highly recommended for LinkedIn: Add a link to a thumbnail image (e.g., a 1200x630px screenshot of the game or architecture) -->
+    <meta property="og:image" content="https://felipemarra.github.io/demo-v2m-4-gameplay-videos-v1/imgs/thumbnail.png" />
+
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/5.3/examples/album/"
@@ -112,7 +124,7 @@
             </p>
             <h2 class="fw-light">Abstract</h2>
             <p class="medium text-body-secondary lh-base" style="text-align: justify;">
-              Video-to-music models have advanced considerably in the last few years, particularly in film and music video applications. In this paper, we investigate this problem in the video game domain, which introduces new challenges for these models: video frames are rendered graphics, music is mostly synthetic audio, and soundtracks loop across entire levels rather than following on-screen events. We introduce a new dataset of 217.6 hours of Super Nintendo (SNES) gameplay video paired with 485 hours of clean soundtracks, free of sound effects and voice-overs, matched to gameplay audio via audio fingerprinting. With this dataset, we train a simple encoder-decoder transformer that passes video features directly to a MusicGen decoder, comparing different encoding strategies: textual descriptions (T5), independent frames (ViT), or spatiotemporal patches (ViViT). Each encoder is tested both frozen and fine-tuned, while the decoder is always fine-tuned. Frozen encoders match or outperform their fine-tuned counterparts on every metric, and the frozen ViViT achieves the best overall results. We compare this model with state-of-the-art baselines using both objective metrics and a listening study (N = 96). Despite having up to 18\% fewer parameters, our model outperforms all baselines on objective metrics, surpasses GVMGen in the listening study, and performs comparably to OSSL.
+              Video-to-music models have advanced considerably in the last few years, particularly in film and music video applications. In this paper, we investigate this problem in the video game domain, which introduces new challenges for these models: video frames are rendered graphics, music is mostly synthetic audio, and soundtracks loop across entire levels rather than following on-screen events. We introduce a new dataset of 217.6 hours of Super Nintendo (SNES) gameplay video paired with 485 hours of clean soundtracks, free of sound effects and voice-overs, matched to gameplay audio via audio fingerprinting. With this dataset, we train a simple encoder-decoder transformer that passes video features directly to a MusicGen decoder, comparing different encoding strategies: textual descriptions (T5), independent frames (ViT), or spatiotemporal patches (ViViT). Each encoder is tested both frozen and fine-tuned, while the decoder is always fine-tuned. Frozen encoders match or outperform their fine-tuned counterparts on every metric, and the frozen ViViT achieves the best overall results. We compare this model with state-of-the-art baselines using both objective metrics and a listening study (N = 96). Despite having up to 18% fewer parameters, our model outperforms all baselines on objective metrics, surpasses GVMGen in the listening study, and performs comparably to OSSL.
             </p>
           </div>
         </div>
